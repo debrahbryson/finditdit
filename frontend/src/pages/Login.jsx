@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { Search, Mail, Lock, ArrowRight } from 'lucide-react';
 import api from '../api/axios';
 
 function Login() {
@@ -28,56 +29,63 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md"
-      >
-        <h1 className="text-3xl font-bold text-blue-600 mb-1">FindIt DIT</h1>
-        <p className="text-gray-500 mb-8">Sign in to your account</p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="your@email.com"
-              required
-            />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl grid grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
+        {/* Left Panel */}
+        <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-10 flex flex-col justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+              <Search size={16} className="text-white" />
+            </div>
+            <span className="text-white font-bold text-lg">FindIt DIT</span>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="••••••••"
-              required
-            />
+            <h2 className="text-3xl font-bold text-white mb-4">Reuniting DIT with their belongings</h2>
+            <p className="text-indigo-200 text-sm">Report lost items, find what others discovered, and connect with your campus community.</p>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition disabled:opacity-50"
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
+          <div className="flex gap-3">
+            {['Lost Items', 'Found Items', 'Claims'].map((tag) => (
+              <span key={tag} className="bg-white/20 text-white text-xs px-3 py-1.5 rounded-full">{tag}</span>
+            ))}
+          </div>
+        </div>
 
-        <p className="text-center text-gray-500 mt-6 text-sm">
-          Don't have an account?{' '}
-          <Link to="/register" className="text-blue-600 font-semibold hover:underline">
-            Register
-          </Link>
-        </p>
-      </motion.div>
+        {/* Right Panel */}
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="p-10 flex flex-col justify-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-1">Welcome back</h2>
+          <p className="text-gray-500 text-sm mb-8">Sign in to your DIT account</p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <div className="relative">
+                <Mail size={16} className="absolute left-3 top-3.5 text-gray-400" />
+                <input type="email" name="email" value={form.email} onChange={handleChange} required
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                  placeholder="your@email.com" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <div className="relative">
+                <Lock size={16} className="absolute left-3 top-3.5 text-gray-400" />
+                <input type="password" name="password" value={form.password} onChange={handleChange} required
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                  placeholder="••••••••" />
+              </div>
+            </div>
+            <button type="submit" disabled={loading}
+              className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50">
+              {loading ? 'Signing in...' : <><span>Sign In</span><ArrowRight size={16} /></>}
+            </button>
+          </form>
+
+          <p className="text-center text-gray-500 mt-6 text-sm">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-indigo-600 font-semibold hover:underline">Register</Link>
+          </p>
+        </motion.div>
+      </div>
     </div>
   );
 }
