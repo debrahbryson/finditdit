@@ -1,32 +1,28 @@
-# ======================
-# Spring Boot / Maven
-# ======================
-backend/target/
+# =========================
+# Spring Boot
+# =========================
+finditdit/target/
 *.class
 *.log
 
-# Maven wrapper
-!backend/.mvn/wrapper/maven-wrapper.jar
-
-# ======================
+# =========================
 # React / Vite
-# ======================
+# =========================
 frontend/node_modules/
 frontend/dist/
 
-# ======================
-# Environment variables
-# ======================
+# =========================
+# Environment files
+# =========================
 .env
-*.env
 frontend/.env
-backend/.env
+finditdit/.env
 
-# ======================
+# =========================
 # IDE
-# ======================
-.vscode/
+# =========================
 .idea/
+.vscode/
 *.iml
 
 # Eclipse
@@ -34,8 +30,8 @@ backend/.env
 .classpath
 .settings/
 
-# ======================
-# Operating System
-# ======================
+# =========================
+# OS
+# =========================
 .DS_Store
 Thumbs.db
