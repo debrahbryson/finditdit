@@ -2,120 +2,132 @@
 
 ## Overview
 
-**FindIt DIT** is a Lost and Found Management System developed as a second-year Object-Oriented Programming (OOP) course project. The application provides a centralized platform where students and staff of the Dar es Salaam Institute of Technology (DIT) can report lost items, post found items, and search for belongings efficiently.
+**FindIt DIT** is a full-stack Lost and Found Management System developed as a second-year **Object-Oriented Programming (OOP)** course project at the **Dar es Salaam Institute of Technology (DIT)**.
 
-The project demonstrates the application of object-oriented programming principles, full-stack web development, and modern software engineering practices using Java Spring Boot, React, and PostgreSQL.
+The system provides a centralized platform where students and staff can report lost items, submit found items, and search for belongings through an organized digital system.
+
+The project demonstrates the application of object-oriented programming principles, RESTful API development, relational database management, and modern frontend development practices using **Java Spring Boot, React, and PostgreSQL**.
 
 ---
 
-## Features
+# Features
 
-- User registration and authentication
-- Report lost items
-- Report found items
-- Browse all reported items
-- Search for lost or found items
-- View detailed information about each item
-- Responsive user interface
-- RESTful API communication between frontend and backend
+* User registration and authentication
+* Report lost items
+* Report found items
+* Browse reported items
+* Search lost and found items
+* View detailed item information
+* Responsive user interface
+* REST API communication between frontend and backend
 
+---
 
+# Technologies Used
 
-## Technologies Used
+## Backend
 
-### Backend
+* Java 21
+* Spring Boot
+* Spring Web MVC
+* Spring Data JPA
+* Hibernate
+* Maven
 
-- Java 21
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Maven
+## Frontend
 
-### Frontend
+* React
+* Vite
+* Tailwind CSS
+* Axios
+* React Router
+* Framer Motion
 
-- React
-- Vite
-- Tailwind CSS
-- Axios
-- React Router
-- Framer Motion
+## Database
 
-### Database
+* PostgreSQL
 
-- PostgreSQL
+## Development Tools
 
-### Development Tools
+* IntelliJ IDEA / Visual Studio Code
+* Postman
+* Git
+* GitHub
 
-- IntelliJ IDEA / Visual Studio Code
-- Postman
-- Git
-- GitHub
+---
 
+# Object-Oriented Programming Concepts Applied
 
+The project demonstrates:
 
-## Object-Oriented Programming Concepts Applied
+* Classes and Objects
+* Encapsulation
+* Inheritance
+* Polymorphism
+* Abstraction
+* Separation of concerns
+* Modular application design
 
-This project demonstrates the use of:
+---
 
-- Classes and Objects
-- Encapsulation
-- Inheritance
-- Polymorphism
-- Abstraction
-- Modular system design
+# Requirements
 
+Before running the project, install:
 
+* Java 21 or later
+* Maven
+* Node.js (v18 or later recommended)
+* PostgreSQL
+* Git
 
-# Getting Started
+Verify installations:
 
-## Prerequisites
+```bash
+java -version
+mvn -version
+node -v
+npm -v
+```
 
-Install the following software before running the project:
+---
 
-- Java 21 or later
-- Maven
-- Node.js (v18 or later recommended)
-- PostgreSQL
-- Git
+# Installation and Setup
 
-
-
-## Clone the Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/debrahbryson/finditdit.git
+
 cd finditdit
 ```
 
+---
 
+# Database Configuration
 
-# Database Setup
+## 1. Start PostgreSQL
 
-### 1. Start PostgreSQL
+Make sure your PostgreSQL server is running.
 
-Ensure your PostgreSQL server is running.
+## 2. Create Database
 
-### 2. Create a database
-
-Using **psql**:
+Using PostgreSQL:
 
 ```sql
 CREATE DATABASE finditdit;
 ```
 
-Or create it using **pgAdmin**.
+You can also create it using pgAdmin.
 
-### 3. Configure Spring Boot
+## 3. Configure Backend Database Connection
 
-Open:
+Navigate to:
 
 ```
 finditdit/src/main/resources/application.properties
 ```
 
-(or `application.yml` if you are using YAML)
-
-Update the database configuration:
+Update:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/finditdit
@@ -129,18 +141,12 @@ spring.jpa.properties.hibernate.format_sql=true
 
 Replace:
 
-- `YOUR_USERNAME`
-- `YOUR_PASSWORD`
+* `YOUR_USERNAME` with your PostgreSQL username
+* `YOUR_PASSWORD` with your PostgreSQL password
 
-with your PostgreSQL credentials.
+---
 
-### 4. Verify the connection
-
-Run the backend. If the application starts successfully without database errors, the connection is configured correctly.
-
-
-
-# Backend Setup
+# Running the Backend
 
 Open a terminal:
 
@@ -148,21 +154,27 @@ Open a terminal:
 cd finditdit
 ```
 
-Run the Spring Boot application:
+Start Spring Boot:
 
 ```bash
 mvn spring-boot:run
 ```
 
-The backend will start on:
+The backend will start at:
 
 ```
 http://localhost:8080
 ```
 
+To verify that it is running, check the Spring Boot console for:
 
+```
+Started FinditditApplication
+```
 
-# Frontend Setup
+---
+
+# Running the Frontend
 
 Open another terminal:
 
@@ -182,65 +194,91 @@ Start the development server:
 npm run dev
 ```
 
-The frontend will typically run on:
+The frontend will run at:
 
 ```
 http://localhost:5173
 ```
 
+Open this URL in your browser.
 
+---
+
+# Running the Complete Application
+
+To use the system:
+
+1. Start PostgreSQL database
+2. Start Spring Boot backend
+
+```bash
+mvn spring-boot:run
+```
+
+3. Start React frontend
+
+```bash
+npm run dev
+```
+
+4. Open:
+
+```
+http://localhost:5173
+```
+
+The frontend communicates with the backend through REST API endpoints running on:
+
+```
+http://localhost:8080
+```
+
+---
 
 # Project Structure
 
 ```
 FindIt DIT/
 │
-├── finditdit/              # Spring Boot backend
-│   ├── src/
-│   ├── pom.xml
-│   └── ...
+├── finditdit/          # Spring Boot backend
 │
-├── frontend/               # React + Vite frontend
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── ...
+├── frontend/           # React frontend
 │
 ├── .gitignore
 └── README.md
 ```
 
+---
 
+# Learning Outcomes
 
-## Learning Outcomes
+This project provided practical experience in:
 
-Through this project, I gained practical experience in:
+* Applying OOP principles in Java
+* Developing REST APIs using Spring Boot
+* Connecting applications with PostgreSQL databases
+* Building responsive interfaces using React
+* Managing source code using Git and GitHub
+* Developing a complete full-stack application
 
-- Applying Object-Oriented Programming principles
-- Building REST APIs using Spring Boot
-- Developing responsive user interfaces with React
-- Managing relational databases using PostgreSQL
-- Version control using Git and GitHub
-- Structuring and organizing a full-stack application
+---
 
+# Future Improvements
 
+Possible future enhancements:
 
-## Future Improvements
+* Image upload support
+* Email notifications
+* Advanced search and filtering
+* User messaging system
+* Administrative dashboard
+* Item claim verification workflow
+* JWT-based authorization
+* Cloud deployment using platforms such as AWS, Azure, Railway, or Render
 
-Planned enhancements include:
+---
 
-- Image upload support
-- Email notifications
-- Advanced search and filtering
-- User messaging
-- Administrative dashboard
-- Item claim verification workflow
-- JWT authentication and authorization
-- Cloud deployment (Render, Railway, Azure, or AWS)
-
-
-
-## Academic Information
+# Academic Information
 
 **Course:** Object-Oriented Programming (OOP)
 
@@ -248,18 +286,19 @@ Planned enhancements include:
 
 **Project Type:** Second-Year Coursework Project
 
+---
 
-
-## Author
+# Author
 
 **Debrah Bryson**
 
 Computer Engineering Student
 
-GitHub: https://github.com/debrahbryson
+GitHub:
+https://github.com/debrahbryson
 
+---
 
+# License
 
-## License
-
-This project was developed for educational purposes as part of coursework at the Dar es Salaam Institute of Technology (DIT).
+This project was developed for educational purposes as part of coursework at the Dar es Salaam Institute of Technology.
