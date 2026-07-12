@@ -1,37 +1,19 @@
-# =========================
-# Spring Boot
-# =========================
-finditdit/target/
-*.class
-*.log
+# Operating system files
+.DS_Store
+Thumbs.db
 
-# =========================
-# React / Vite
-# =========================
-frontend/node_modules/
-frontend/dist/
-
-# =========================
-# Environment files
-# =========================
-.env
-frontend/.env
-finditdit/.env
-
-# =========================
-# IDE
-# =========================
+# IDE files
 .idea/
 .vscode/
 *.iml
 
-# Eclipse
-.project
-.classpath
-.settings/
+# Environment variables
+.env
 
-# =========================
-# OS
-# =========================
-.DS_Store
-Thumbs.db
+# Logs
+*.log
+
+# Build artifacts
+target/
+dist/
+build/
