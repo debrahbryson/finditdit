@@ -18,20 +18,20 @@ function ItemCard({ item }) {
       transition={{ duration: 0.2 }}
       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
     >
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={item.imageUrl ? encodeURI(item.imageUrl) : 'https://placehold.co/400x200?text=No+Image'}
-          alt={item.title}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        />
-        <div className="absolute top-3 right-3">
-          <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}`}>
-            <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80"></span>
-            {item.status}
-          </span>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-      </div>
+<div className="relative overflow-hidden bg-gray-100">
+  <img
+    src={item.imageUrl ? encodeURI(item.imageUrl) : 'https://placehold.co/400x200?text=No+Image'}
+    alt={item.title}
+    className="w-full object-cover transition-transform duration-300 hover:scale-105"
+  />
+  <div className="absolute top-3 right-3">
+    <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80"></span>
+      {item.status}
+    </span>
+  </div>
+  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+</div>
 
       <div className="p-4">
         <h3 className="font-semibold text-gray-900 text-base mb-1 line-clamp-1">{item.title}</h3>

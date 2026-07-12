@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ItemCard from '../components/ItemCard';
 import api from '../api/axios';
+import Masonry from 'react-masonry-css';
 
 const FILTERS = ['ALL', 'LOST', 'FOUND', 'CLAIMED', 'RESOLVED'];
 
@@ -138,15 +139,18 @@ function Home() {
             <p className="text-gray-400 text-sm mt-1">Try a different search or filter</p>
           </div>
         ) : (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {items.map((item, i) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}>
-                <ItemCard item={item} />
-              </motion.div>
-            ))}
+        <Masonry
+          breakpointCols={{ default: 4, 1100: 3, 700: 2, 500: 1 }}
+          className="flex gap-6"
+          columnClassName="flex flex-col gap-6"
+        >
+        {items.map((item, i) => (
+          <motion.div key={item.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}>
+            <ItemCard item={item} />
           </motion.div>
+          ))}
+        </Masonry>
         )}
       </div>
     </div>
