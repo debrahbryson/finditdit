@@ -86,7 +86,7 @@ cd finditdit
 ### Backend Setup
 
 ```bash
-cd backend
+cd finditdit
 mvn spring-boot:run
 ```
 
