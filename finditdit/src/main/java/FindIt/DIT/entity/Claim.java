@@ -1,17 +1,20 @@
 package FindIt.DIT.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "claims")
 public class Claim extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id", nullable = false)
+    @JsonIgnoreProperties({"password", "ditId", "verified", "createdAt"})
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "claimed_by", nullable = false)
+    @JsonIgnoreProperties({"password", "ditId", "verified", "createdAt"})
     private User claimedBy;
 
     @Column(nullable = false, length = 1000)

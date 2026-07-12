@@ -33,26 +33,25 @@ public class AdminController {
         this.itemRepository = itemRepository;
     }
 
-    @PostMapping("/upload-ids")
-    public ResponseEntity<MessageResponse> uploadIds(@RequestParam("file") MultipartFile file) {
-        try {
-            CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()));
-            String[] line;
-            int count = 0;
-            while ((line = reader.readNext()) != null) {
-                String ditId = line[0].trim();
-                String type = line[1].trim().toUpperCase();
-                if (!validDitIdRepository.existsByDitId(ditId)) {
-                    ValidDitId validId = new ValidDitId(ditId, Role.valueOf(type));
-                    validDitIdRepository.save(validId);
-                    count++;
-                }
+@PostMapping("/upload-ids")
+public ResponseEntity<MessageResponse> uploadIds(@RequestParam("file") MultipartFile file) {
+    try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
+        String[] line;
+        int count = 0;
+        while ((line = reader.readNext()) != null) {
+            String ditId = line[0].trim();
+            String type = line[1].trim().toUpperCase();
+            if (!validDitIdRepository.existsByDitId(ditId)) {
+                ValidDitId validId = new ValidDitId(ditId, Role.valueOf(type));
+                validDitIdRepository.save(validId);
+                count++;
             }
-            return ResponseEntity.ok(new MessageResponse(count + " IDs uploaded successfully"));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Failed to upload IDs: " + e.getMessage()));
         }
+        return ResponseEntity.ok(new MessageResponse(count + " IDs uploaded successfully"));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body(new MessageResponse("Failed to upload IDs: " + e.getMessage()));
     }
+}
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
