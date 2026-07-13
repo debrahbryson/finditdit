@@ -50,6 +50,13 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+        config.setAllowedOrigins(List.of(
+        "http://localhost:5173",
+        "https://finditdit.vercel.app",
+        "https://finditdit-ih0za891q-debrah-bryson.vercel.app"
+        ));
         return source;
+
     }
 }
+
