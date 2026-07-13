@@ -12,9 +12,29 @@ const LOCATIONS = ['Block A', 'Block B', 'Block C', 'Library', 'Cafeteria', 'Lab
 function PostItem() {
   const [form, setForm] = useState({ title: '', description: '', category: '', location: '', imageUrl: '', status: 'LOST' });
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImageFile(file);
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await api.post('/upload/image', formData);
+      setForm({ ...form, imageUrl: res.data.url });
+      toast.success('Image uploaded!');
+    } catch (err) {
+      toast.error('Image upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,16 +118,33 @@ function PostItem() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Image URL <span className="text-gray-400">(optional)</span></label>
-                <div className="relative">
-                  <LinkIcon size={16} className="absolute left-3 top-3.5 text-gray-400" />
-                  <input name="imageUrl" value={form.imageUrl} onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-                    placeholder="https://..." />
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Image <span className="text-gray-400">(optional)</span>
+                </label>
+                <div className="space-y-2">
+                  <div className="relative">
+                    <LinkIcon size={16} className="absolute left-3 top-3.5 text-gray-400" />
+                    <input name="imageUrl" value={form.imageUrl} onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                      placeholder="Paste image URL or upload below..." />
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <label className="flex-1 flex items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-xl py-3 cursor-pointer hover:border-indigo-400 transition">
+                      <Upload size={16} className="text-gray-400" />
+                      <span className="text-sm text-gray-500">
+                        {uploading ? 'Uploading...' : imageFile ? imageFile.name : 'Upload from device'}
+                      </span>
+                      <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                    </label>
+                    {form.imageUrl && (
+                      <img src={form.imageUrl} alt="preview"
+                        className="w-16 h-16 object-cover rounded-xl border border-gray-200" />
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <button type="submit" disabled={loading}
+              <button type="submit" disabled={loading || uploading}
                 className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50">
                 <Upload size={16} />
                 {loading ? 'Posting...' : 'Post Item'}
