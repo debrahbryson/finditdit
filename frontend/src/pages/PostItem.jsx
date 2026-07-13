@@ -51,14 +51,14 @@ function PostItem() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="max-w-2xl mx-auto px-4 py-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h2 className="text-2xl font-bold text-gray-800 mb-1">Post an Item</h2>
-          <p className="text-gray-500 text-sm mb-6">Report a lost or found item on campus</p>
+          <h2 className="text-2xl font-bold text-white mb-1">Post an Item</h2>
+          <p className="text-white/60 text-sm mb-6">Report a lost or found item on campus</p>
 
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+          <div className="glass-card rounded-3xl shadow-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="flex gap-4 p-1 bg-gray-100 rounded-2xl">
                 {['LOST', 'FOUND'].map((s) => (

@@ -19,11 +19,11 @@ function MyClaims() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-1">My Claims</h2>
-        <p className="text-gray-500 text-sm mb-6">Track the status of your submitted claims</p>
+        <h2 className="text-2xl font-bold text-white mb-1">My Claims</h2>
+        <p className="text-white/60 text-sm mb-6">Track the status of your submitted claims</p>
 
         {loading ? (
           <div className="space-y-4">
@@ -44,7 +44,7 @@ function MyClaims() {
               return (
                 <motion.div key={claim.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className={`bg-white border rounded-2xl p-5 ${config.bg}`}>
+                  className={`glass-card rounded-2xl p-5 border ${config.bg}`}>
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="font-semibold text-gray-800">{claim.item?.title}</h3>
                     <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${config.badge}`}>

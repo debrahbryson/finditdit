@@ -87,11 +87,11 @@ function ItemDetail() {
   const config = statusConfig[item.status] || statusConfig.LOST;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <button onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-500 hover:text-indigo-600 mb-6 transition font-medium">
+          className="flex items-center gap-2 text-white/60 hover:text-white mb-6 transition font-medium">
           <ArrowLeft size={16} /> Back
         </button>
 
@@ -101,7 +101,7 @@ function ItemDetail() {
             className="lg:col-span-2 space-y-6">
 
             {/* Image Card */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="glass-card rounded-3xl shadow-sm overflow-hidden">
               <div className="relative bg-gray-100">
                 <img
                   src={item.imageUrl ? encodeURI(item.imageUrl) : 'https://placehold.co/800x400?text=No+Image'}
@@ -131,7 +131,7 @@ function ItemDetail() {
 
             {/* Claims for owner */}
             {isOwner && claims.length > 0 && (
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
+              <div className="glass-card rounded-3xl shadow-sm p-6">
                 <h3 className="font-bold text-gray-800 mb-4 text-lg">
                   Claims <span className="text-indigo-600">({claims.length})</span>
                 </h3>

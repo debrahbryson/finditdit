@@ -33,10 +33,10 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Admin Dashboard</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">Admin Dashboard</h2>
 
         <div className="grid grid-cols-3 gap-6 mb-8">
           {[
@@ -45,7 +45,7 @@ function AdminDashboard() {
             { label: 'Valid IDs', value: stats.validIds, icon: <ShieldCheck size={24} />, color: 'purple' },
           ].map((s) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-4">
+              className="glass-card rounded-2xl shadow-md p-6 flex items-center gap-4">
               <div className={`p-3 rounded-xl bg-${s.color}-100 text-${s.color}-600`}>{s.icon}</div>
               <div>
                 <p className="text-gray-500 text-sm">{s.label}</p>
@@ -55,7 +55,7 @@ function AdminDashboard() {
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
+        <div className="glass-card rounded-2xl shadow-md p-6 mb-8">
           <h3 className="font-semibold text-gray-800 mb-4">Upload Valid DIT IDs (CSV)</h3>
           <p className="text-sm text-gray-500 mb-4">CSV format: <code>DIT_ID, STUDENT</code> or <code>DIT_ID, STAFF</code></p>
           <div className="flex gap-4">
@@ -68,7 +68,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md p-6">
+        <div className="glass-card rounded-2xl shadow-md p-6">
           <h3 className="font-semibold text-gray-800 mb-4">Registered Users</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

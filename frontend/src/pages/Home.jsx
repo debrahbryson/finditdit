@@ -52,16 +52,16 @@ function Home() {
   const foundCount = items.filter(i => i.status === 'FOUND').length;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white px-6 py-12">
+      <div className="glass border-b border-white/10 text-white px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-indigo-200 text-sm font-medium mb-2">Welcome back, {user.fullName?.split(' ')[0]} 👋</p>
-            <h1 className="text-4xl font-bold mb-2">DIT Lost & Found</h1>
-            <p className="text-indigo-200 mb-8">Helping the DIT community reunite with their belongings</p>
+            <p className="text-white/60 text-sm font-medium mb-2">Welcome back, {user.fullName?.split(' ')[0]} 👋</p>
+            <h1 className="text-4xl font-bold mb-2 text-white">DIT Lost & Found</h1>
+            <p className="text-white/60 mb-8">Helping the DIT community reunite with their belongings</p>
 
             <form onSubmit={handleSearch} className="flex gap-3 max-w-xl">
               <div className="flex-1 relative">
@@ -91,7 +91,7 @@ function Home() {
             { label: 'Found Items', value: foundCount, color: 'from-emerald-500 to-teal-600' },
           ].map((stat) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-md p-5 flex items-center gap-4 border border-gray-100">
+              className="glass-card rounded-2xl shadow-md p-5 flex items-center gap-4">
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
                 <TrendingUp size={20} className="text-white" />
               </div>
@@ -111,7 +111,7 @@ function Home() {
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
                   filter === f
                     ? `bg-gradient-to-r ${filterColors[f]} text-white shadow-md`
-                    : 'bg-white text-gray-500 border border-gray-200 hover:border-indigo-300'
+                    : 'bg-white/10 text-white/70 border border-white/20 hover:border-indigo-300'
                 }`}>
                 {f}
               </button>
@@ -132,11 +132,11 @@ function Home() {
           </div>
         ) : items.length === 0 ? (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Search size={28} className="text-indigo-400" />
             </div>
-            <p className="text-gray-500 font-medium">No items found</p>
-            <p className="text-gray-400 text-sm mt-1">Try a different search or filter</p>
+            <p className="text-white/70 font-medium">No items found</p>
+            <p className="text-white/50 text-sm mt-1">Try a different search or filter</p>
           </div>
         ) : (
         <Masonry
