@@ -58,7 +58,7 @@ function PostItem() {
           <h2 className="text-2xl font-bold text-white mb-1">Post an Item</h2>
           <p className="text-white/60 text-sm mb-6">Report a lost or found item on campus</p>
 
-          <div className="glass-card rounded-3xl shadow-sm p-8">
+          <div className="glass rounded-3xl shadow-sm p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="flex gap-4 p-1 bg-gray-100 rounded-2xl">
                 {['LOST', 'FOUND'].map((s) => (
@@ -80,7 +80,7 @@ function PostItem() {
                 <div className="relative">
                   <FileText size={16} className="absolute left-3 top-3.5 text-gray-400" />
                   <input name="title" value={form.title} onChange={handleChange} required
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-yellow-400/50 text-white text-sm placeholder-white/30"
                     placeholder="e.g. Blue Backpack" />
                 </div>
               </div>
@@ -88,7 +88,7 @@ function PostItem() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                 <textarea name="description" value={form.description} onChange={handleChange} required rows={3}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
+                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-yellow-400/50 text-white text-sm placeholder-white/30 resize-none"
                   placeholder="Describe the item in detail — color, brand, distinguishing features..." />
               </div>
 
@@ -98,7 +98,7 @@ function PostItem() {
                   <div className="relative">
                     <Tag size={16} className="absolute left-3 top-3.5 text-gray-400" />
                     <select name="category" value={form.category} onChange={handleChange} required
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm appearance-none">
+                      className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-yellow-400/50 text-white text-sm placeholder-white/30 appearance-none">
                       <option value="">Select category</option>
                       {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
                     </select>
@@ -109,7 +109,7 @@ function PostItem() {
                   <div className="relative">
                     <MapPin size={16} className="absolute left-3 top-3.5 text-gray-400" />
                     <select name="location" value={form.location} onChange={handleChange} required
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm appearance-none">
+                      className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-yellow-400/50 text-white text-sm placeholder-white/30 appearance-none">
                       <option value="">Select location</option>
                       {LOCATIONS.map((l) => <option key={l}>{l}</option>)}
                     </select>

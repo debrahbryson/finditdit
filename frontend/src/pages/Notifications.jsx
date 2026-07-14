@@ -9,7 +9,10 @@ function Notifications() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/notifications').then((res) => { setNotifications(Array.isArray(res.data) ? res.data : []); setLoading(false); });
+    api.get('/notifications').then((res) => {
+      setNotifications(Array.isArray(res.data) ? res.data : []);
+      setLoading(false);
+    });
   }, []);
 
   const markAsRead = async (id) => {
@@ -26,11 +29,11 @@ function Notifications() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-white">Notifications</h2>
-            {unreadCount > 0 && <p className="text-sm text-indigo-600 mt-1">{unreadCount} unread</p>}
+            {unreadCount > 0 && <p className="text-sm text-yellow-400 mt-1">{unreadCount} unread</p>}
           </div>
           {unreadCount > 0 && (
             <button onClick={() => notifications.filter(n => !n.read).forEach(n => markAsRead(n.id))}
-              className="flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition">
+              className="flex items-center gap-2 text-sm text-white/50 hover:text-yellow-400 transition">
               <CheckCheck size={16} /> Mark all read
             </button>
           )}
@@ -38,14 +41,14 @@ function Notifications() {
 
         {loading ? (
           <div className="space-y-3">
-            {[...Array(4)].map((_, i) => <div key={i} className="bg-white rounded-2xl h-16 animate-pulse" />)}
+            {[...Array(4)].map((_, i) => <div key={i} className="glass rounded-2xl h-16 animate-pulse" />)}
           </div>
         ) : notifications.length === 0 ? (
           <div className="text-center py-20">
-            <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Bell size={28} className="text-indigo-400" />
+            <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Bell size={28} className="text-yellow-400" />
             </div>
-            <p className="text-gray-500 font-medium">No notifications yet</p>
+            <p className="text-white/70 font-medium">No notifications yet</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -54,18 +57,18 @@ function Notifications() {
                 transition={{ delay: i * 0.05 }}
                 onClick={() => !n.read && markAsRead(n.id)}
                 className={`flex items-start gap-4 p-4 rounded-2xl cursor-pointer transition border ${
-                  n.read ? 'glass border-white/10' : 'glass border-indigo-400/30'
+                  n.read ? 'glass border-white/10' : 'glass border-yellow-400/30'
                 }`}>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  n.read ? 'bg-gray-100' : 'bg-indigo-100'
+                  n.read ? 'bg-white/5' : 'bg-yellow-400/10'
                 }`}>
-                  <Bell size={18} className={n.read ? 'text-gray-400' : 'text-indigo-600'} />
+                  <Bell size={18} className={n.read ? 'text-white/30' : 'text-yellow-400'} />
                 </div>
                 <div className="flex-1">
-                  <p className={`text-sm ${n.read ? 'text-white/50' : 'text-white font-medium'}`}>{n.message}</p>
-                  <p className="text-xs text-white/40 mt-1">{new Date(n.createdAt).toLocaleDateString()}</p>
+                  <p className={`text-sm ${n.read ? 'text-white/40' : 'text-white font-medium'}`}>{n.message}</p>
+                  <p className="text-xs text-white/30 mt-1">{new Date(n.createdAt).toLocaleDateString()}</p>
                 </div>
-                {!n.read && <div className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0" />}
+                {!n.read && <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />}
               </motion.div>
             ))}
           </div>

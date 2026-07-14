@@ -60,29 +60,29 @@ function ItemDetail() {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="flex items-center justify-center h-96">
-        <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin" />
       </div>
     </div>
   );
 
   if (!item) return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen relative z-10">
       <Navbar />
       <div className="flex items-center justify-center h-96">
-        <p className="text-gray-500">Item not found.</p>
+        <p className="text-white/50">Item not found.</p>
       </div>
     </div>
   );
 
   const isOwner = item.postedBy?.email === user.email;
   const statusConfig = {
-    LOST: { bg: 'bg-red-500', text: 'text-red-600', light: 'bg-red-50' },
-    FOUND: { bg: 'bg-emerald-500', text: 'text-emerald-600', light: 'bg-emerald-50' },
-    CLAIMED: { bg: 'bg-amber-500', text: 'text-amber-600', light: 'bg-amber-50' },
-    RESOLVED: { bg: 'bg-gray-400', text: 'text-gray-600', light: 'bg-gray-50' },
+    LOST: { bg: 'bg-red-500' },
+    FOUND: { bg: 'bg-emerald-500' },
+    CLAIMED: { bg: 'bg-amber-500' },
+    RESOLVED: { bg: 'bg-gray-400' },
   };
   const config = statusConfig[item.status] || statusConfig.LOST;
 
@@ -91,18 +91,17 @@ function ItemDetail() {
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <button onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-white/60 hover:text-white mb-6 transition font-medium">
+          className="flex items-center gap-2 text-white/50 hover:text-yellow-400 mb-6 transition font-medium">
           <ArrowLeft size={16} /> Back
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left - Image + Details */}
+          {/* Left */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-2 space-y-6">
 
-            {/* Image Card */}
-            <div className="glass-card rounded-3xl shadow-sm overflow-hidden">
-              <div className="relative bg-gray-100">
+            <div className="glass rounded-3xl overflow-hidden border border-yellow-400/10">
+              <div className="relative bg-black/20">
                 <img
                   src={item.imageUrl ? encodeURI(item.imageUrl) : 'https://placehold.co/800x400?text=No+Image'}
                   alt={item.title}
@@ -113,42 +112,41 @@ function ItemDetail() {
                 </span>
               </div>
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">{item.title}</h2>
-                <p className="text-gray-600 leading-relaxed mb-4">{item.description}</p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                  <span className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-full">
-                    <MapPin size={14} className="text-indigo-400" />{item.location}
+                <h2 className="text-2xl font-bold text-white mb-2">{item.title}</h2>
+                <p className="text-white/60 leading-relaxed mb-4">{item.description}</p>
+                <div className="flex flex-wrap gap-3 text-sm text-white/40">
+                  <span className="flex items-center gap-1.5 glass px-3 py-1.5 rounded-full">
+                    <MapPin size={14} className="text-yellow-400" />{item.location}
                   </span>
-                  <span className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-full">
-                    <Calendar size={14} className="text-indigo-400" />{new Date(item.createdAt).toLocaleDateString()}
+                  <span className="flex items-center gap-1.5 glass px-3 py-1.5 rounded-full">
+                    <Calendar size={14} className="text-yellow-400" />{new Date(item.createdAt).toLocaleDateString()}
                   </span>
-                  <span className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-full">
-                    <User size={14} className="text-indigo-400" />{item.postedBy?.fullName}
+                  <span className="flex items-center gap-1.5 glass px-3 py-1.5 rounded-full">
+                    <User size={14} className="text-yellow-400" />{item.postedBy?.fullName}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Claims for owner */}
             {isOwner && claims.length > 0 && (
-              <div className="glass-card rounded-3xl shadow-sm p-6">
-                <h3 className="font-bold text-gray-800 mb-4 text-lg">
-                  Claims <span className="text-indigo-600">({claims.length})</span>
+              <div className="glass rounded-3xl p-6 border border-yellow-400/10">
+                <h3 className="font-bold text-white mb-4 text-lg">
+                  Claims <span className="text-yellow-400">({claims.length})</span>
                 </h3>
                 <div className="space-y-4">
                   {claims.map((claim) => (
-                    <div key={claim.id} className="border border-gray-100 rounded-2xl p-4 hover:border-indigo-100 transition">
+                    <div key={claim.id} className="glass-dark rounded-2xl p-4 border border-white/5">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                          <div className="w-8 h-8 bg-gradient-to-br from-blue-800 to-yellow-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
                             {claim.claimedBy?.fullName?.charAt(0)}
                           </div>
-                          <p className="font-medium text-gray-800 text-sm">{claim.claimedBy?.fullName}</p>
+                          <p className="font-medium text-white text-sm">{claim.claimedBy?.fullName}</p>
                         </div>
                         <span className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${
-                          claim.status === 'PENDING' ? 'bg-amber-100 text-amber-600' :
-                          claim.status === 'ACCEPTED' ? 'bg-emerald-100 text-emerald-600' :
-                          'bg-red-100 text-red-600'
+                          claim.status === 'PENDING' ? 'bg-yellow-400/10 text-yellow-400' :
+                          claim.status === 'ACCEPTED' ? 'bg-emerald-400/10 text-emerald-400' :
+                          'bg-red-400/10 text-red-400'
                         }`}>
                           {claim.status === 'PENDING' ? <Clock size={10} /> :
                            claim.status === 'ACCEPTED' ? <CheckCircle size={10} /> :
@@ -156,7 +154,7 @@ function ItemDetail() {
                           {claim.status}
                         </span>
                       </div>
-                      <p className="text-gray-500 text-sm mb-3 pl-10">{claim.message}</p>
+                      <p className="text-white/50 text-sm mb-3 pl-10">{claim.message}</p>
                       {claim.status === 'PENDING' && (
                         <div className="flex gap-2 pl-10">
                           <button onClick={() => handleClaimStatus(claim.id, 'ACCEPTED')}
@@ -176,60 +174,53 @@ function ItemDetail() {
             )}
           </motion.div>
 
-          {/* Right - Sidebar */}
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-            className="space-y-4">
-
-            {/* Posted by */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-              <h3 className="font-bold text-gray-800 mb-4">Posted by</h3>
+          {/* Sidebar */}
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
+            <div className="glass rounded-3xl p-6 border border-yellow-400/10">
+              <h3 className="font-bold text-white mb-4">Posted by</h3>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-800 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
                   {item.postedBy?.fullName?.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">{item.postedBy?.fullName}</p>
-                  <p className="text-xs text-emerald-600 flex items-center gap-1">
+                  <p className="font-semibold text-white">{item.postedBy?.fullName}</p>
+                  <p className="text-xs text-yellow-400 flex items-center gap-1">
                     <CheckCircle size={11} /> Verified DIT Member
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Category & Location */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-              <h3 className="font-bold text-gray-800 mb-4">Item Details</h3>
+            <div className="glass rounded-3xl p-6 border border-yellow-400/10">
+              <h3 className="font-bold text-white mb-4">Item Details</h3>
               <div className="space-y-3">
+                {[
+                  { label: 'Category', value: item.category },
+                  { label: 'Location', value: item.location },
+                  { label: 'Posted', value: new Date(item.createdAt).toLocaleDateString() },
+                ].map((d) => (
+                  <div key={d.label} className="flex items-center justify-between">
+                    <span className="text-white/40 text-sm">{d.label}</span>
+                    <span className="text-white text-sm font-medium">{d.value}</span>
+                  </div>
+                ))}
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-500 text-sm">Category</span>
-                  <span className="text-gray-800 text-sm font-medium bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">{item.category}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500 text-sm">Location</span>
-                  <span className="text-gray-800 text-sm font-medium">{item.location}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500 text-sm">Status</span>
+                  <span className="text-white/40 text-sm">Status</span>
                   <span className={`text-sm font-medium px-3 py-1 rounded-full text-white ${config.bg}`}>{item.status}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-500 text-sm">Posted</span>
-                  <span className="text-gray-800 text-sm font-medium">{new Date(item.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>
 
-            {/* Claim form */}
             {!isOwner && item.status === 'LOST' && (
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-                <h3 className="font-bold text-gray-800 mb-1">Submit a Claim</h3>
-                <p className="text-gray-400 text-xs mb-4">Describe how you found this item or prove ownership</p>
+              <div className="glass rounded-3xl p-6 border border-yellow-400/10">
+                <h3 className="font-bold text-white mb-1">Submit a Claim</h3>
+                <p className="text-white/40 text-xs mb-4">Describe how you found this item or prove ownership</p>
                 <textarea value={message} onChange={(e) => setMessage(e.target.value)}
                   placeholder="I found this item near..."
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none mb-3"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-yellow-400/50 text-white text-sm resize-none placeholder-white/30 mb-3"
                   rows={4} />
                 <button onClick={handleClaim} disabled={claiming}
-                  className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50">
+                  className="w-full bg-gradient-to-r from-blue-800 to-yellow-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50">
                   <Send size={16} />
                   {claiming ? 'Submitting...' : 'Submit Claim'}
                 </button>
@@ -237,12 +228,12 @@ function ItemDetail() {
             )}
 
             {isOwner && (
-              <div className="bg-indigo-50 rounded-3xl p-6 text-center border border-indigo-100">
-                <div className="w-10 h-10 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                  <User size={18} className="text-indigo-600" />
+              <div className="glass rounded-3xl p-6 text-center border border-yellow-400/20">
+                <div className="w-10 h-10 bg-yellow-400/10 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <User size={18} className="text-yellow-400" />
                 </div>
-                <p className="text-indigo-700 font-semibold text-sm">This is your item</p>
-                <p className="text-indigo-400 text-xs mt-1">Claims from others appear on the left</p>
+                <p className="text-yellow-400 font-semibold text-sm">This is your item</p>
+                <p className="text-white/30 text-xs mt-1">Claims from others appear on the left</p>
               </div>
             )}
           </motion.div>

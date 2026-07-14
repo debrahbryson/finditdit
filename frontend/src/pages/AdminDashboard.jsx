@@ -13,7 +13,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     api.get('/admin/dashboard').then((res) => setStats(res.data));
-    api.get('/admin/users').then((res) => setUsers(res.data));
+    api.get('/admin/users').then((res) => setUsers(Array.isArray(res.data) ? res.data : []));
   }, []);
 
   const handleUpload = async () => {
@@ -40,40 +40,40 @@ function AdminDashboard() {
 
         <div className="grid grid-cols-3 gap-6 mb-8">
           {[
-            { label: 'Total Users', value: stats.totalUsers, icon: <Users size={24} />, color: 'blue' },
-            { label: 'Total Items', value: stats.totalItems, icon: <Package size={24} />, color: 'green' },
-            { label: 'Valid IDs', value: stats.validIds, icon: <ShieldCheck size={24} />, color: 'purple' },
+            { label: 'Total Users', value: stats.totalUsers, icon: <Users size={24} />, color: 'from-blue-800 to-yellow-500' },
+            { label: 'Total Items', value: stats.totalItems, icon: <Package size={24} />, color: 'from-emerald-600 to-teal-500' },
+            { label: 'Valid IDs', value: stats.validIds, icon: <ShieldCheck size={24} />, color: 'from-purple-600 to-indigo-500' },
           ].map((s) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              className="glass-card rounded-2xl shadow-md p-6 flex items-center gap-4">
-              <div className={`p-3 rounded-xl bg-${s.color}-100 text-${s.color}-600`}>{s.icon}</div>
+              className="glass rounded-2xl p-6 flex items-center gap-4 border border-yellow-400/10">
+              <div className={`p-3 rounded-xl bg-gradient-to-br ${s.color}`}>{s.icon}</div>
               <div>
-                <p className="text-gray-500 text-sm">{s.label}</p>
-                <p className="text-2xl font-bold text-gray-800">{s.value ?? '...'}</p>
+                <p className="text-white/50 text-sm">{s.label}</p>
+                <p className="text-2xl font-bold text-white">{s.value ?? '...'}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="glass-card rounded-2xl shadow-md p-6 mb-8">
-          <h3 className="font-semibold text-gray-800 mb-4">Upload Valid DIT IDs (CSV)</h3>
-          <p className="text-sm text-gray-500 mb-4">CSV format: <code>DIT_ID, STUDENT</code> or <code>DIT_ID, STAFF</code></p>
+        <div className="glass rounded-2xl p-6 mb-8 border border-yellow-400/10">
+          <h3 className="font-semibold text-white mb-1">Upload Valid DIT IDs (CSV)</h3>
+          <p className="text-sm text-white/40 mb-4">CSV format: <code className="text-yellow-400">DIT_ID, STUDENT</code> or <code className="text-yellow-400">DIT_ID, STAFF</code></p>
           <div className="flex gap-4">
             <input type="file" accept=".csv" onChange={(e) => setFile(e.target.files[0])}
-              className="flex-1 border border-gray-200 rounded-xl px-4 py-2" />
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white/60 text-sm" />
             <button onClick={handleUpload} disabled={uploading}
-              className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition disabled:opacity-50">
+              className="bg-gradient-to-r from-blue-800 to-yellow-500 text-white px-6 py-2 rounded-xl hover:opacity-90 transition disabled:opacity-50 font-medium">
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
           </div>
         </div>
 
-        <div className="glass-card rounded-2xl shadow-md p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Registered Users</h3>
+        <div className="glass rounded-2xl p-6 border border-yellow-400/10">
+          <h3 className="font-semibold text-white mb-4">Registered Users</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-400 border-b">
+                <tr className="text-left text-white/30 border-b border-white/10">
                   <th className="pb-3">Name</th>
                   <th className="pb-3">Email</th>
                   <th className="pb-3">DIT ID</th>
@@ -83,15 +83,15 @@ function AdminDashboard() {
               </thead>
               <tbody>
                 {users.map((u) => (
-                  <tr key={u.id} className="border-b last:border-0">
-                    <td className="py-3 font-medium">{u.fullName}</td>
-                    <td className="py-3 text-gray-500">{u.email}</td>
-                    <td className="py-3 text-gray-500">{u.ditId}</td>
+                  <tr key={u.id} className="border-b border-white/5 last:border-0">
+                    <td className="py-3 font-medium text-white">{u.fullName}</td>
+                    <td className="py-3 text-white/50">{u.email}</td>
+                    <td className="py-3 text-white/50">{u.ditId}</td>
                     <td className="py-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        u.role === 'ADMIN' ? 'bg-red-100 text-red-600' :
-                        u.role === 'STAFF' ? 'bg-purple-100 text-purple-600' :
-                        'bg-blue-100 text-blue-600'
+                        u.role === 'ADMIN' ? 'bg-yellow-400/10 text-yellow-400' :
+                        u.role === 'STAFF' ? 'bg-purple-400/10 text-purple-400' :
+                        'bg-blue-400/10 text-blue-400'
                       }`}>{u.role}</span>
                     </td>
                     <td className="py-3">{u.verified ? '✅' : '❌'}</td>
