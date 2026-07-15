@@ -60,12 +60,12 @@ function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/70 mb-1">DIT ID</label>
+              <label className="block text-sm font-medium text-white/70 mb-1">DIT ID <span className="text-white/30 font-normal">(12-digit registration number)</span></label>
               <div className="relative">
                 <CreditCard size={16} className="absolute left-3 top-3.5 text-white/30" />
                 <input type="text" name="ditId" value={form.ditId} onChange={handleChange} required
                   className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-yellow-400/50 text-white text-sm placeholder-white/30"
-                  placeholder="e.g. 2024/BEng/COE/001" />
+                  placeholder="e.g. 240242455798" />
               </div>
             </div>
             <div>
